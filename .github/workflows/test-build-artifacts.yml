@@ -12,4 +12,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build Swift package
-        run: swift build --package-path ../../design_tokens_ios -scheme release -destination "platform=iOS Simulator,name=iPhone 14 Pro"
+        run: swift build --package-path ../../design_tokens_ios
+        
+      - name: Create XCFramework
+        uses: unsignedapps/swift-create-xcframework@v2

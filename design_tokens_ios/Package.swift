@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "design_tokens_ios",
-    platforms: [.iOS(.v14)],
+    platforms: [.iOS(.v14), .macOS(.v12)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -22,5 +22,6 @@ let package = Package(
         .target(
             name: "design_tokens_ios",
             dependencies: []),
+        .binaryTarget(name: "DesignTokens", path: "./DesignTokens.xcframework")
     ]
 )
