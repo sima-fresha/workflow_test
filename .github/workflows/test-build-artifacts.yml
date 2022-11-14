@@ -15,4 +15,5 @@ jobs:
         run: swift build --package-path ./design_tokens_ios
 
       - name: Create XCFramework
-        uses: unsignedapps/swift-create-xcframework@v2
+        uses: unsignedapps/swift-create-xcframework@v2.3.0
+        run: mint run swift create-xcframework --platform ios --package-path ./design_tokens_ios
