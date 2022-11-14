@@ -12,5 +12,5 @@ jobs:
         uses: actions/checkout@v3
         
   build_artifacts:
-    needs: release
+    needs: test_workflow
     uses: sima-fresha/workflow_test/.github/workflows/test-build-artifacts.yml@main
