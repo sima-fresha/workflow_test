@@ -1,0 +1,16 @@
+name: Test
+
+on:
+  push:
+
+jobs:
+  test_workflow:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        
+  build_artifacts:
+    needs: release
+    uses: sima-refresha/workflow_test/.github/workflows/test-build-artifacts.yml@main
