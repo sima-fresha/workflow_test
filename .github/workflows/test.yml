@@ -5,7 +5,7 @@ on:
 
 jobs:
   test_workflow:
-    name: Test
+    name: Test2
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
