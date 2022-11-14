@@ -13,4 +13,4 @@ jobs:
         
   build_artifacts:
     needs: release
-    uses: sima-refresha/workflow_test/.github/workflows/test-build-artifacts.yml@main
+    uses: sima-fresha/workflow_test/.github/workflows/test-build-artifacts.yml@main
