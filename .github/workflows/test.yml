@@ -20,7 +20,7 @@ jobs:
         uses: unsignedapps/swift-create-xcframework@v2.3.0
 
       - name: Create package
-        run: mint run swift design_tokens_ios --platform ios --package-path ../design_tokens_ios --zip-version 1.0
+        run: mint run swift design_tokens_ios --platform ios --package-path ./design_tokens_ios --zip-version 1.0
 
       - uses: ncipollo/release-action@v1
         with:
