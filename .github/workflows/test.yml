@@ -2,15 +2,26 @@ name: Test
 
 on:
   push:
+    tags:
+    - '*'
 
 jobs:
   test_workflow:
     name: Test2
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-        
-  build_artifacts:
-    needs: test_workflow
-    uses: sima-fresha/workflow_test/.github/workflows/test-build-artifacts.yml@main
+      
+      - name: Build Swift package
+        run: swift build --package-path ./design_tokens_ios
+
+      - name: Install tooling
+        uses: unsignedapps/swift-create-xcframework@v2.3.0
+
+      - name: Create package
+        run: mint run swift design_tokens_ios --platform ios --package-path ./design_tokens_ios --zip-version 1.0
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: ./design_tokens_ios-1.0.zip
