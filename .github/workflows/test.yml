@@ -12,16 +12,32 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-      
-      - name: Setup mint
-        uses: fabasoad/setup-mint-action@main
-
-      - name: Install tooling
-        run: mint install unsignedapps/swift-create-xcframework
 
       - name: Create package
-        run: mint run swift design_tokens_ios --platform ios --package-path ./design_tokens_ios --zip-version 1.0
+        working-directory: ./design_tokens_ios
+        run: |
+          swift package generate-xcodeproj
+          xcodebuild archive \
+            -project design_tokens_ios.xcodeproj \
+            -scheme design_tokens_ios-Package \
+            -destination "generic/platform=iOS Simulator" \
+            -archivePath "archives/design_tokens_ios_simulator.xcarchive" \
+            SKIP_INSTALL=NO \
+            BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+          xcodebuild archive \
+            -project design_tokens_ios.xcodeproj \
+            -scheme design_tokens_ios-Package \
+            -destination "generic/platform=iOS" \
+            -archivePath "archives/design_tokens_ios.xcarchive" \
+            SKIP_INSTALL=NO \
+            BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+          xcodebuild -create-xcframework \
+             -framework archives/design_tokens_ios_simulator.xcarchive/Products/Library/Frameworks/design_tokens_ios.framework \
+             -framework archives/design_tokens_ios.xcarchive/Products/Library/Frameworks/design_tokens_ios.framework \
+             -output output/design_tokens_ios.xcframework
 
-      - uses: ncipollo/release-action@v1
+      - name: Upload
+        working-directory: ./design_tokens_ios
+        uses: ncipollo/release-action@v1
         with:
-          artifacts: ./design_tokens_ios-1.0.zip
+          artifacts: ./design_tokens_ios.xcframework
