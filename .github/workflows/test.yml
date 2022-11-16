@@ -36,7 +36,11 @@ jobs:
              -framework archives/design_tokens_ios.xcarchive/Products/Library/Frameworks/design_tokens_ios.framework \
              -output output/design_tokens_ios.xcframework
 
+      - name: Create zip of xcframework
+        working-directory: ./design_tokens_ios/output
+        run: zip design_tokens_ios-1.0.zip design_tokens_ios.xcframework
+
       - name: Upload
         uses: ncipollo/release-action@v1
         with:
-          artifacts: ./design_tokens_ios/design_tokens_ios.xcframework
+          artifacts: ./design_tokens_ios/output/design_tokens_ios-1.0.zip
