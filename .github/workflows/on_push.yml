@@ -11,6 +11,10 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
+      - name: Git config
+        run: |
+          git config --global user.email "si.ma@fresha.com"
+
       - name: Publish to another repo
         uses: cpina/github-action-push-to-another-repository@main
         env:
@@ -19,5 +23,4 @@ jobs:
           source-directory: 'design_tokens_ios'
           destination-github-username: ${{ env.GITHUB_ACTOR }}
           destination-repository-name: 'sima-fresha/push-test'
-          user-email: si.ma@fresha.com
           target-branch: main
