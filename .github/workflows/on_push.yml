@@ -18,5 +18,5 @@ jobs:
         with:
           source-directory: 'design_tokens_ios'
           destination-github-username: ${{ env.GITHUB_ACTOR }}
-          destination-repository-name: 'push-test'
+          destination-repository-name: 'sima-fresha/push-test'
           target-branch: main
