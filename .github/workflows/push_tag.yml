@@ -23,7 +23,7 @@ jobs:
           git config --global user.email "${COMMITTER_EMAIL}"
           git config --global user.name "${COMMITTER_NAME}"
 
-          export TAG=$(cat Sources/DesignTokens/Generated/version.md)
+          export TAG=$(cat test/version.md)
           echo "TAG=${TAG}" >> $GITHUB_ENV
 
           git tag $TAG -m $TAG
