@@ -14,6 +14,7 @@ jobs:
       - name: Git config
         run: |
           git config --global user.email "si.ma@fresha.com"
+          git config --global user.name "si.ma"
 
       - name: Publish to another repo
         uses: cpina/github-action-push-to-another-repository@main
