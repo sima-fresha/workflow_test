@@ -27,11 +27,3 @@ jobs:
           user-email: 'si.ma@fresha.com'
           user-name: 'si.ma'
           target-branch: main
-
-      - name: Push tag
-        run: |
-          export TAG=v$(cat package.json | grep -o '"version": ".*"' | grep -o '[^"]*' | tail -1)
-          echo "TAG=${TAG}" >> $GITHUB_ENV
-
-          git tag $TAG -m $TAG
-          git push --follow-tags

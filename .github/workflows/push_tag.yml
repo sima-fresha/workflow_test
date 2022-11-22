@@ -1,0 +1,30 @@
+name: Push tag
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'test/**'
+
+jobs:
+  publish:
+    env:
+      COMMITTER_NAME: Design Tokens Deployer
+      COMMITTER_EMAIL: dariusz+designtokens@fresha.com
+    name: Push tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Create tag
+        run: |
+          git config --global user.email "${COMMITTER_EMAIL}"
+          git config --global user.name "${COMMITTER_NAME}"
+
+          export TAG=$(cat Sources/DesignTokens/Generated/version.md)
+          echo "TAG=${TAG}" >> $GITHUB_ENV
+
+          git tag $TAG -m $TAG
+          git push --follow-tags
