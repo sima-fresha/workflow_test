@@ -1,0 +1,22 @@
+name: OnPush
+
+on:
+  push:
+
+jobs:
+  test_workflow:
+    name: OnPush
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Publish to another repo
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          source-directory: 'design_tokens_ios'
+          destination-github-username: ${{ env.GITHUB_ACTOR }}
+          destination-repository-name: 'push-test'
+          target-branch: main

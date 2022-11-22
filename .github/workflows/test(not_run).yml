@@ -1,9 +1,8 @@
 name: Test
 
 on:
-  push:
-    tags:
-    - '*'
+  pull_request:
+    closed:
 
 jobs:
   test_workflow:
